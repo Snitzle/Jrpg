@@ -20,14 +20,7 @@ public class Player extends GameObject {
         y += velY;
 
         movement();
-
-        if ( x > Game.WIDTH || x < 0) {
-            x = 0;
-        }
-
-        if ( y > Game.HEIGHT || y < 0 ) {
-            y = 0;
-        }
+        boundCollision();
 
     }
 
@@ -69,6 +62,21 @@ public class Player extends GameObject {
                 velX += _dcc;
             }
 
+        }
+
+    }
+
+    private void boundCollision() {
+
+        // This doesn't work. I need to work out how to move the box to the opposite side of the screen.
+        if ( x > Game.WIDTH ) {
+            x = 0;
+        } else if ( x < 0) {
+            x = Game.WIDTH;
+        } else if ( y > Game.HEIGHT ) {
+            y = 0;
+        } else if ( y < 0 ) {
+            y = Game.HEIGHT;
         }
 
     }
