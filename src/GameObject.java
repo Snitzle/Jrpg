@@ -3,8 +3,8 @@ import java.awt.*;
 public abstract class GameObject {
 
     /**
-     * This is the base object that contains generic data
-     * that every object in the game requires
+     * This is the base object that contains generic data that every object in the game requires.
+     * This is unrealistic because any game with mild complexity wouldn't have every class inherit the same thing.
      */
 
     protected float x, y;

@@ -4,7 +4,12 @@ import java.util.LinkedList;
 public class Handler {
 
     /**
-     * Updates every object in the game
+     * This class contains the logic for updating class variables.
+     * These variables are used to make things move or could be used for HP.
+     *
+     * Updates every object in the game.
+     *
+     * Referenced in the main game loop.
      */
 
     public LinkedList<GameObject> object = new LinkedList<GameObject>();

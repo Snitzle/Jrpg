@@ -11,8 +11,6 @@ public class Game extends Canvas implements Runnable {
 
     private Handler handler;
 
-
-
     private synchronized void start() {
         // Stops spinning up new threads if game is already running
         if ( isRunning ) return;
@@ -44,6 +42,12 @@ public class Game extends Canvas implements Runnable {
         start();
 
         handler = new Handler();
+        KeyInput input = new KeyInput();
+
+        addKeyListener(input);
+        // ID is just a reference to an ENUM? How is that an ID?
+        // This can be turned into a factory to create instances of the enemies.
+        handler.addObject(new Player(100,100, ID.Player, input));
 
     }
 
