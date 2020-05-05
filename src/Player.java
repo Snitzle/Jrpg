@@ -1,14 +1,29 @@
 import java.awt.*;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
 public class Player extends GameObject {
 
     private float _acc = 0.3f; //Acceleration
     private float _dcc = 0.1f; //Deceleration
 
-    private KeyInput input;
+    private static Player Instance;
 
-    public Player(float x, float y, ID id, KeyInput input) {
+    protected KeyInput input;
+
+    private Player(float x, float y, ID id) {
         super(x, y, id);
+    }
+
+    public static Player getInstance() {
+        if (Instance == null) {
+            Instance = new Player(100,100, ID.Player);
+        }
+
+        return Instance;
+    }
+
+    public void init(KeyInput input) {
         this.input = input;
     }
 
@@ -21,6 +36,12 @@ public class Player extends GameObject {
 
         movement();
         boundCollision();
+
+        /* Write collision function here
+        * How to check I overlap any other object?
+        * */
+
+
 
     }
 

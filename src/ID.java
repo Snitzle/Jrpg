@@ -1,5 +1,5 @@
 public enum ID {
 
-    Player(), Zombie(), Block(), Bullet();
+    Player(), Enemy(), Block(), Bullet();
 
 }

@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
 public class Game extends Canvas implements Runnable {
 
     public static int WIDTH = 800, HEIGHT = 600;
@@ -41,13 +43,22 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, title, this);
         start();
 
-        handler = new Handler();
-        KeyInput input = new KeyInput();
+        setFocusable(true);
+        requestFocus();
+        requestFocusInWindow();
 
+        handler = new Handler();
+
+        KeyInput input = new KeyInput();
         addKeyListener(input);
-        // ID is just a reference to an ENUM? How is that an ID?
+
+        Player player1 = Player.getInstance();
+        player1.init(input);
+
+        handler.addObject(player1);
+
         // This can be turned into a factory to create instances of the enemies.
-        handler.addObject(new Player(100,100, ID.Player, input));
+        handler.addObject(new Enemy(0,0, ID.Enemy ));
 
     }
 
