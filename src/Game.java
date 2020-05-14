@@ -4,9 +4,13 @@ import java.awt.image.BufferStrategy;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class Game extends Canvas implements Runnable {
-
-    public static int WIDTH = 800, HEIGHT = 600;
+    // 32px squares, 40 wide, 30 tall
+    public static int WIDTH = 1280, HEIGHT = 960;
     public static String title = "ZOMBIE GAME";
+    public static int gridWidth = WIDTH / 32;
+    public static int gridHeight = HEIGHT / 32;
+
+    public static int[][] gameGrid = new int[gridWidth][gridHeight];
 
     private Thread thread;
     private boolean isRunning = false;
@@ -47,7 +51,7 @@ public class Game extends Canvas implements Runnable {
         requestFocus();
         requestFocusInWindow();
 
-        handler = new Handler();
+        handler = Handler.getInstance();
 
         KeyInput input = new KeyInput();
         addKeyListener(input);
@@ -58,7 +62,7 @@ public class Game extends Canvas implements Runnable {
         handler.addObject(player1);
 
         // This can be turned into a factory to create instances of the enemies.
-        handler.addObject(new Enemy(0,0, ID.Enemy ));
+//        handler.addObject(new Enemy(0,0, ID.Enemy ));
 
     }
 
@@ -130,6 +134,27 @@ public class Game extends Canvas implements Runnable {
         // This is the bulk of the rendering
         g.setColor(Color.BLACK);
         g.fillRect(0,0, WIDTH, HEIGHT);
+
+        g.setColor(Color.BLUE);
+
+        int x = 0;
+        int y = 0;
+
+        while ( y < HEIGHT) {
+            // int x1, int y1, int x2, int y2
+            g.drawLine(x, y, WIDTH, y);
+            y += 32;
+        }
+
+        y = 0;
+
+        while ( x < WIDTH) {
+            // int x1, int y1, int x2, int y2
+            g.drawLine(x, y, x, HEIGHT);
+            x += 32;
+        }
+
+
 
         handler.render(g);
 

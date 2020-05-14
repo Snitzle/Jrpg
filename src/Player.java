@@ -4,20 +4,20 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class Player extends GameObject {
 
-    private float _acc = 0.3f; //Acceleration
-    private float _dcc = 0.1f; //Deceleration
+    private int key = 1;
+    private boolean keyPressed = false;
 
     private static Player Instance;
 
     protected KeyInput input;
 
-    private Player(float x, float y, ID id) {
+    private Player(int x, int y, ID id) {
         super(x, y, id);
     }
 
     public static Player getInstance() {
         if (Instance == null) {
-            Instance = new Player(100,100, ID.Player);
+            Instance = new Player(0,0, ID.Player);
         }
 
         return Instance;
@@ -31,10 +31,11 @@ public class Player extends GameObject {
     public void tick() {
 
         // Movement is brought in from the constructor of the object.
-        x += velX;
-        y += velY;
+//        x;
+//        y;
 
         movement();
+        updateState();
         boundCollision();
 
         /* Write collision function here
@@ -55,41 +56,51 @@ public class Player extends GameObject {
             3 = right
         */
 
+
         if ( input.keys[3] ) {
-            velX += _acc; // go left
+
+            if(!keyPressed) {
+                x += 1; // go right
+                keyPressed = true;
+            }
+
         } else if ( input.keys[1] ) {
-            velX -= _acc; // go right
-        } else if ( !input.keys[3] && !input.keys[1] ) {
-
-            // This brings the player to a stop.
-            if ( velX > 0 ) {
-                velX -= _dcc;
-            } else if ( velX < 0 ) {
-                velX += _dcc;
+            if(!keyPressed) {
+                x -= 1; // go left
+                keyPressed = true;
             }
-
+        } else {
+            keyPressed = false;
         }
 
-        if ( input.keys[2] ) {
-            velY += _acc; // go up
-        } else if ( input.keys[0] ) {
-            velY -= _acc; // go down
-        } else if ( !input.keys[2] && !input.keys[0] ) {
 
-            // This brings the player to a stop.
-            if ( velX > 0 ) {
-                velX -= _dcc;
-            } else if ( velX < 0 ) {
-                velX += _dcc;
-            }
 
-        }
+//
+//        if ( input.keys[2] ) {
+//            velY += _acc; // go up
+//        } else if ( input.keys[0] ) {
+//            velY -= _acc; // go down
+//        } else if ( !input.keys[2] && !input.keys[0] ) {
+//
+//            // This brings the player to a stop.
+//            if ( velX > 0 ) {
+//                velX -= _dcc;
+//            } else if ( velX < 0 ) {
+//                velX += _dcc;
+//            }
+//
+//        }
 
     }
 
+    private void updateState() {
+        Handler handler = Handler.getInstance();
+        handler.setGridPos(this.x, this.y, this.key);
+    }
+
+
     private void boundCollision() {
 
-        // This doesn't work. I need to work out how to move the box to the opposite side of the screen.
         if ( x > Game.WIDTH ) {
             x = 0;
         } else if ( x < 0) {
@@ -105,7 +116,8 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect( (int) x, (int) y,32,32);
+
+        g.fillRect( x * 32, y * 32 ,32,32);
     }
 
 }

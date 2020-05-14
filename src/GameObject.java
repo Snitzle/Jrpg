@@ -6,19 +6,19 @@ public abstract class GameObject {
      * This is the base object that contains generic data that every object in the game requires.
      * This is unrealistic because any game with mild complexity wouldn't have every class inherit the same thing.
      */
-
-    protected float x, y;
-    protected float velX, velY;
+    protected int x, y;
     protected ID id;
     protected int health;
 
-    public GameObject(float x, float y, ID id) {
+    protected int moveStep = 32;
+
+    public GameObject(int x, int y, ID id) {
         this.x = x;
         this.y = y;
         this.id = id;
     }
 
-    public GameObject(float x, float y, ID id, int health) {
+    public GameObject(int x, int y, ID id, int health) {
         this.x = x;
         this.y = y;
         this.id = id;
@@ -32,7 +32,7 @@ public abstract class GameObject {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -40,24 +40,8 @@ public abstract class GameObject {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(int y) {
         this.y = y;
-    }
-
-    public float getVelX() {
-        return velX;
-    }
-
-    public void setVelX(float velX) {
-        this.velX = velX;
-    }
-
-    public float getVelY() {
-        return velY;
-    }
-
-    public void setVelY(float velY) {
-        this.velY = velY;
     }
 
     public ID getId() {
