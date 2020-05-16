@@ -5,7 +5,7 @@ import java.util.List;
 public class MapFactory {
 
     public Map create() {
-        Map map = new Map(0, createMapList() );
+        return new Map(0, createMapList() );
     }
 
     public int generateMapID() {

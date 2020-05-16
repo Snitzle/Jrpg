@@ -10,7 +10,7 @@ public class MapManager {
     ArrayList<Map> maps = new ArrayList<>();
 
     public Map getCurrentMap() {
-
+        return maps.get(0);
     }
 
 }
