@@ -4,28 +4,12 @@ import java.util.List;
 
 public class Map implements MapInterface {
 
+    private int ID;
     private List<List<HashMap<String, Integer>>> Map;
 
-    public List<List<HashMap<String, Integer>>> getMap() {
-        if (Map == null) {
-            Map = new ArrayList<>();
-            for (int i = 0; i < Game.gridWidth; i++) {
-
-                ArrayList<HashMap<String, Integer>> column = new ArrayList<>();
-
-                for (int j = 0; j < Game.gridHeight; j++) {
-
-                    HashMap<String, Integer> cell = new HashMap<>();
-                    cell.put("key", 0);
-                    cell.put("enemyID", 0);
-
-                    column.set(j, cell);
-
-                }
-                Map.set(i, column);
-            }
-        }
-        return Map;
+    public Map(int ID,  List<List<HashMap<String, Integer>>> map) {
+        this.ID = ID;
+        this.Map = map;
     }
 
     public void setMapPosition(int x, int y, int key) {
@@ -42,6 +26,10 @@ public class Map implements MapInterface {
 
     public int getMapColumnHeight( int x, int y ) {
         return Map.get(x).get(y).size();
+    }
+
+    public int getID() {
+        return ID;
     }
 
 }
