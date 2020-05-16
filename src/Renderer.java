@@ -2,11 +2,11 @@ import java.awt.*;
 
 public class Renderer {
 
-    public void blit(int[][] gameState, Graphics g) {
+    public void blit( Map map, Graphics g) {
 
-        for (int i = 0; i < gameState.length; i++) {
-            for (int j = 0; j < gameState[i].length; j++) {
-                switch (gameState[i][j]) {
+        for (int i = 0; i < map.getMapRowWidth(i); i++) {
+            for (int j = 0; j < map.getMapColumnHeight(i,j); j++) {
+                switch (map.getMapKey(i,j)) {
                     case 0:
                         g.setColor(Color.BLUE);
                         g.fillRect( i * 32, j * 32, 32 ,32);

@@ -36,4 +36,12 @@ public class Map implements MapInterface {
         return Map.get(x).get(y).get("key");
     }
 
+    public int getMapRowWidth ( int x ) {
+        return  Map.get(x).size();
+    }
+
+    public int getMapColumnHeight( int x, int y ) {
+        return Map.get(x).get(y).size();
+    }
+
 }
