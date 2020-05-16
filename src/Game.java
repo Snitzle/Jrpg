@@ -40,11 +40,6 @@ public class Game extends Canvas implements Runnable {
 
     public Game() {
 
-        System.out.println(WIDTH);
-        System.out.println(HEIGHT);
-        System.out.println(gridWidth);
-        System.out.println(gridHeight);
-
         new Window(WIDTH, HEIGHT, title, this);
         start();
 

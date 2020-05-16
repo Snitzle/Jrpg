@@ -1,10 +1,6 @@
-import java.awt.*;
+public class Player extends Actor {
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-
-public class Player extends GameObject {
-
-    private int key = 1;
+    private static int key = 1;
     private int[] nextPos = new int[3];
     private boolean keyPressed = false;
 

@@ -1,6 +1,4 @@
-import java.awt.*;
-
-public abstract class GameObject {
+public abstract class Actor {
 
     /**
      * This is the base object that contains generic data that every object in the game requires.
@@ -12,13 +10,13 @@ public abstract class GameObject {
 
     protected int moveStep = 32;
 
-    public GameObject(int x, int y, ID id) {
+    public Actor(int x, int y, ID id) {
         this.x = x;
         this.y = y;
         this.id = id;
     }
 
-    public GameObject(int x, int y, ID id, int health) {
+    public Actor(int x, int y, ID id, int health) {
         this.x = x;
         this.y = y;
         this.id = id;
