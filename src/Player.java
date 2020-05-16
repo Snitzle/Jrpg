@@ -5,6 +5,7 @@ import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 public class Player extends GameObject {
 
     private int key = 1;
+    private int[] nextPos = new int[3];
     private boolean keyPressed = false;
 
     private static Player Instance;
@@ -30,19 +31,9 @@ public class Player extends GameObject {
     @Override
     public void tick() {
 
-        // Movement is brought in from the constructor of the object.
-//        x;
-//        y;
-
         movement();
         updateState();
         boundCollision();
-
-        /* Write collision function here
-        * How to check I overlap any other object?
-        * */
-
-
 
     }
 
@@ -56,17 +47,28 @@ public class Player extends GameObject {
             3 = right
         */
 
-
         if ( input.keys[3] ) {
-
             if(!keyPressed) {
+                setNextPos(this.x, this.y, Map.getMapKey(x + 1, y));
                 x += 1; // go right
                 keyPressed = true;
             }
-
         } else if ( input.keys[1] ) {
             if(!keyPressed) {
+                setNextPos(this.x, this.y, Map.getMapKey(x - 1, y));
                 x -= 1; // go left
+                keyPressed = true;
+            }
+        } else if ( input.keys[2] ) {
+            if(!keyPressed) {
+                setNextPos(this.x, this.y, Map.getMapKey(x, y + 1));
+                y += 1; // go up
+                keyPressed = true;
+            }
+        } else if ( input.keys[0] ) {
+            if(!keyPressed) {
+                setNextPos(this.x, this.y, Map.getMapKey(x, y - 1));
+                y -= 1; // go down
                 keyPressed = true;
             }
         } else {
@@ -74,28 +76,21 @@ public class Player extends GameObject {
         }
 
 
+    }
 
-//
-//        if ( input.keys[2] ) {
-//            velY += _acc; // go up
-//        } else if ( input.keys[0] ) {
-//            velY -= _acc; // go down
-//        } else if ( !input.keys[2] && !input.keys[0] ) {
-//
-//            // This brings the player to a stop.
-//            if ( velX > 0 ) {
-//                velX -= _dcc;
-//            } else if ( velX < 0 ) {
-//                velX += _dcc;
-//            }
-//
-//        }
+    public void setNextPos(int x, int y, int key) {
+        nextPos[0] = x;
+        nextPos[1] = y;
+        nextPos[2] = key;
+    }
 
+    public int[] getNextPos() {
+        return nextPos;
     }
 
     private void updateState() {
-        Handler handler = Handler.getInstance();
-        handler.setGridPos(this.x, this.y, this.key);
+        Map.setMapPosition(this.x, this.y, this.key);
+        Map.setMapPosition(nextPos[0], nextPos[1], nextPos[2]);
     }
 
 
@@ -111,13 +106,6 @@ public class Player extends GameObject {
             y = Game.HEIGHT;
         }
 
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.setColor(Color.red);
-
-        g.fillRect( x * 32, y * 32 ,32,32);
     }
 
 }

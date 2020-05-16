@@ -33,9 +33,9 @@ public class Enemy extends GameObject {
 
     }
 
-    @Override
-    public void render(Graphics g) {
-        g.setColor(Color.green);
-        g.fillRect( (int) x, (int) y,32,32);
-    }
+//    @Override
+//    public void render(Graphics g) {
+//        g.setColor(Color.green);
+//        g.fillRect( (int) x, (int) y,32,32);
+//    }
 }

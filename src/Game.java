@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-
 public class Game extends Canvas implements Runnable {
     // 32px squares, 40 wide, 30 tall
     public static int WIDTH = 1280, HEIGHT = 960;
@@ -10,9 +8,8 @@ public class Game extends Canvas implements Runnable {
     public static int gridWidth = WIDTH / 32;
     public static int gridHeight = HEIGHT / 32;
 
-    public static int[][] gameGrid = new int[gridWidth][gridHeight];
-
     private Thread thread;
+    private Renderer renderer;
     private boolean isRunning = false;
 
     private Handler handler;
@@ -43,7 +40,11 @@ public class Game extends Canvas implements Runnable {
 
     public Game() {
 
-        //Constructor
+        System.out.println(WIDTH);
+        System.out.println(HEIGHT);
+        System.out.println(gridWidth);
+        System.out.println(gridHeight);
+
         new Window(WIDTH, HEIGHT, title, this);
         start();
 
@@ -51,6 +52,7 @@ public class Game extends Canvas implements Runnable {
         requestFocus();
         requestFocusInWindow();
 
+        renderer = new Renderer();
         handler = Handler.getInstance();
 
         KeyInput input = new KeyInput();
@@ -60,9 +62,6 @@ public class Game extends Canvas implements Runnable {
         player1.init(input);
 
         handler.addObject(player1);
-
-        // This can be turned into a factory to create instances of the enemies.
-//        handler.addObject(new Enemy(0,0, ID.Enemy ));
 
     }
 
@@ -131,10 +130,20 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        // This is the bulk of the rendering
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0, WIDTH, HEIGHT);
+        renderer.blit(Map.getMap(), g);
 
+        bs.show();
+        g.dispose();
+
+    }
+
+    public static void main(String[] args) {
+        new Game();
+    }
+
+    public void drawDebugGrid(Graphics g) {
+
+        // Add to render method
         g.setColor(Color.BLUE);
 
         int x = 0;
@@ -154,17 +163,6 @@ public class Game extends Canvas implements Runnable {
             x += 32;
         }
 
-
-
-        handler.render(g);
-
-        bs.show();
-        g.dispose();
-
-    }
-
-    public static void main(String[] args) {
-        new Game();
     }
 
 }

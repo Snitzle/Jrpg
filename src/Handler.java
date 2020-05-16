@@ -27,33 +27,9 @@ public class Handler {
 
     public LinkedList<GameObject> object = new LinkedList<GameObject>();
 
-    public int[][] getGrid() {
-        return grid;
-    }
-
-    public void setGrid(int[][] grid) {
-        this.grid = grid;
-    }
-
-    public int getGridPos(int x, int y){
-        return grid[x][y];
-    }
-
-    public void setGridPos(int x, int y, int key) {
-        this.grid[x][y] = grid[x][y];
-    }
-
-    private int[][] grid = new int[Game.gridWidth][Game.gridHeight];
-
     public void tick() {
         for ( GameObject obj : object ) {
             obj.tick();
-        }
-    }
-
-    public void render(Graphics g) {
-        for ( GameObject obj : object ) {
-            obj.render(g);
         }
     }
 
