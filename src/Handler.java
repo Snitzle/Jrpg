@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Handler {
@@ -11,7 +12,7 @@ public class Handler {
         return Instance;
     }
 
-    public LinkedList<Actor> object = new LinkedList<Actor>();
+    public ArrayList<Actor> object = new ArrayList<Actor>();
 
     public void tick() {
         for ( Actor obj : object ) {

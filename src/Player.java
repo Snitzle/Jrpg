@@ -12,6 +12,9 @@ public class Player extends Actor {
         super(x, y, id);
     }
 
+    private Scene currentScene = Scene.getInstance();
+    private Map gameMap = currentScene.getCurrentMap();
+
     public static Player getInstance() {
         if (Instance == null) {
             Instance = new Player(0,0, ID.Player);
@@ -45,25 +48,25 @@ public class Player extends Actor {
 
         if ( input.keys[3] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, Map.getMapKey(x + 1, y));
+                setNextPos(this.x, this.y, gameMap.getMapKey(x + 1, y));
                 x += 1; // go right
                 keyPressed = true;
             }
         } else if ( input.keys[1] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, Map.getMapKey(x - 1, y));
+                setNextPos(this.x, this.y, gameMap.getMapKey(x - 1, y));
                 x -= 1; // go left
                 keyPressed = true;
             }
         } else if ( input.keys[2] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, Map.getMapKey(x, y + 1));
+                setNextPos(this.x, this.y, gameMap.getMapKey(x, y + 1));
                 y += 1; // go up
                 keyPressed = true;
             }
         } else if ( input.keys[0] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, Map.getMapKey(x, y - 1));
+                setNextPos(this.x, this.y, gameMap.getMapKey(x, y - 1));
                 y -= 1; // go down
                 keyPressed = true;
             }
@@ -85,8 +88,8 @@ public class Player extends Actor {
     }
 
     private void updateState() {
-        Map.setMapPosition(this.x, this.y, this.key);
-        Map.setMapPosition(nextPos[0], nextPos[1], nextPos[2]);
+        gameMap.setMapPosition(this.x, this.y, this.key);
+        gameMap.setMapPosition(nextPos[0], nextPos[1], nextPos[2]);
     }
 
 

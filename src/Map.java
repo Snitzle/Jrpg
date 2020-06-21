@@ -1,20 +1,40 @@
-public class Map {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-    private static int[][] Map;
+public class Map implements MapInterface {
 
-    public static int[][] getMap() {
-        if (Map == null) {
-            Map = new int[Game.gridWidth][Game.gridHeight];
-        }
-        return Map;
+    private int ID;
+    private List<List<HashMap<String, Integer>>> Map;
+
+    /**
+     * Id to identify map and the map data structure.
+     * @param ID
+     * @param map
+     */
+    public Map(int ID,  List<List<HashMap<String, Integer>>> map) {
+        this.ID = ID;
+        this.Map = map;
     }
 
-    public static void setMapPosition(int x, int y, int key) {
-        Map[x][y] = key;
+    public void setMapPosition(int x, int y, int key) {
+        Map.get(x).get(y).put("key", key);
     }
 
-    public static int getMapKey(int x, int y) {
-        return Map[x][y];
+    public int getMapKey(int x, int y) {
+        return Map.get(x).get(y).get("key");
+    }
+
+    public int getMapRowWidth ( int x ) {
+        return  Map.get(x).size();
+    }
+
+    public int getMapColumnHeight( int x, int y ) {
+        return Map.get(x).get(y).size();
+    }
+
+    public int getID() {
+        return ID;
     }
 
 }
