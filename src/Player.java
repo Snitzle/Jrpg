@@ -1,7 +1,7 @@
 public class Player extends Actor {
 
-    private static int key = 1;
-    private int[] nextPos = new int[3];
+    private static int key = 0;
+    private int[] nextPos = new int[3]; //
     private boolean keyPressed = false;
 
     private static Player Instance;
@@ -39,7 +39,7 @@ public class Player extends Actor {
     private void movement() {
 
         /*
-            Legend
+            Legend:
             0 = up
             1 = left
             2 = down
@@ -74,10 +74,16 @@ public class Player extends Actor {
             keyPressed = false;
         }
 
+    }
 
+    public void checkCollision() {
+//        if () {
+//
+//        }
     }
 
     public void setNextPos(int x, int y, int key) {
+        // Stops the player painting the map, leaving their colour in the previous square.
         nextPos[0] = x;
         nextPos[1] = y;
         nextPos[2] = key;
