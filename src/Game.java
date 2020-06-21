@@ -124,9 +124,12 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        MapFactory mf = new MapFactory();
 
-        Map map = new Map();
-        renderer.blit(map, g);
+        Map gameMap = Scene.getInstance().getCurrentMap();
+        System.out.println();
+
+        renderer.blit(gameMap, g);
 
         bs.show();
         g.dispose();

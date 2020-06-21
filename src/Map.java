@@ -7,6 +7,11 @@ public class Map implements MapInterface {
     private int ID;
     private List<List<HashMap<String, Integer>>> Map;
 
+    /**
+     * Id to identify map and the map data structure.
+     * @param ID
+     * @param map
+     */
     public Map(int ID,  List<List<HashMap<String, Integer>>> map) {
         this.ID = ID;
         this.Map = map;

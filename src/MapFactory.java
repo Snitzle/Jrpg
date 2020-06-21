@@ -4,13 +4,12 @@ import java.util.List;
 
 public class MapFactory {
 
-    public Map create() {
-        return new Map(0, createMapList() );
-    }
+    int mapID = 0;
 
-    public int generateMapID() {
-        int x = 0;
-        return x;
+    public Map create() {
+        Map map = new Map(mapID, createMapList());
+        mapID += 1;
+        return map;
     }
 
     public List<List<HashMap<String, Integer>>> createMapList() {
@@ -27,10 +26,10 @@ public class MapFactory {
                 cell.put("key", 0);
                 cell.put("enemyID", 0);
 
-                column.set(j, cell);
+                column.add(j, cell);
 
             }
-            map.set(i, column);
+            map.add(i, column);
         }
 
         return map;

@@ -4,8 +4,8 @@ public class Renderer {
 
     public void blit( Map map, Graphics g) {
 
-        for (int i = 0; i < map.getMapRowWidth(i); i++) {
-            for (int j = 0; j < map.getMapColumnHeight(i,j); j++) {
+        for (int i = 0; i < Game.gridWidth; i++) {
+            for (int j = 0; j < Game.gridHeight; j++) {
                 switch (map.getMapKey(i,j)) {
                     case 0:
                         g.setColor(Color.BLUE);
