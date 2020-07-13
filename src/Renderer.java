@@ -8,14 +8,14 @@ public class Renderer {
             for (int j = 0; j < Game.gridHeight; j++) {
                 switch (map.getMapKey(i,j)) {
                     case 0:
-                        g.setColor(Color.BLUE);
-                        g.fillRect( i * 32, j * 32, 32 ,32);
-                        break;
-                    case 1:
                         g.setColor(Color.RED);
                         g.fillRect( i * 32, j * 32, 32 ,32);
                         break;
-                    default:
+                    case 1:
+                        g.setColor(Color.GREEN);
+                        g.fillRect( i * 32, j * 32, 32 ,32);
+                        break;
+                    case 2:
                         g.setColor(Color.BLACK);
                         g.fillRect( i * 32, j * 32, 32 ,32);
                         break;

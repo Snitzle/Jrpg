@@ -1,7 +1,7 @@
 public class Player extends Actor {
 
-    private static int key = 1;
-    private int[] nextPos = new int[3];
+    private static int key = 0;
+    private int[] nextPos = new int[3]; //
     private boolean keyPressed = false;
 
     private static Player Instance;
@@ -39,7 +39,7 @@ public class Player extends Actor {
     private void movement() {
 
         /*
-            Legend
+            Legend:
             0 = up
             1 = left
             2 = down
@@ -48,36 +48,50 @@ public class Player extends Actor {
 
         if ( input.keys[3] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, gameMap.getMapKey(x + 1, y));
-                x += 1; // go right
+                if ( gameMap.getMapKey(x + 1, y) != 2) {
+                    setNextPos(this.x, this.y, gameMap.getMapKey(x + 1, y));
+                    x += 1; // go right
+                }
                 keyPressed = true;
             }
         } else if ( input.keys[1] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, gameMap.getMapKey(x - 1, y));
-                x -= 1; // go left
+                if ( gameMap.getMapKey(x - 1, y) != 2) {
+                    setNextPos(this.x, this.y, gameMap.getMapKey(x - 1, y));
+                    x -= 1; // go left
+                }
                 keyPressed = true;
             }
         } else if ( input.keys[2] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, gameMap.getMapKey(x, y + 1));
-                y += 1; // go up
+
+                if ( gameMap.getMapKey(x, y + 1) != 2) {
+                    setNextPos(this.x, this.y, gameMap.getMapKey(x, y + 1));
+                    y += 1; // go up
+                }
+
                 keyPressed = true;
             }
         } else if ( input.keys[0] ) {
             if(!keyPressed) {
-                setNextPos(this.x, this.y, gameMap.getMapKey(x, y - 1));
-                y -= 1; // go down
+
+                if ( gameMap.getMapKey(x, y - 1) != 2) {
+                    setNextPos(this.x, this.y, gameMap.getMapKey(x, y - 1));
+                    y -= 1; // go down
+                }
+
                 keyPressed = true;
+
             }
         } else {
             keyPressed = false;
         }
 
-
     }
 
+
     public void setNextPos(int x, int y, int key) {
+        // Stops the player painting the map, leaving their colour in the previous square.
         nextPos[0] = x;
         nextPos[1] = y;
         nextPos[2] = key;
