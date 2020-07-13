@@ -1,7 +1,7 @@
 public class Player extends Actor {
 
     private static int key = 0;
-    private int[] nextPos = new int[3]; //
+    private Position nextPos = new Position(0,0,0);
     private boolean keyPressed = false;
 
     private static Player Instance;
@@ -30,9 +30,9 @@ public class Player extends Actor {
     @Override
     public void tick() {
 
+        boundCollision(); // Check if player touches edge of screen
         movement();
         updateState();
-        boundCollision();
 
     }
 
@@ -49,16 +49,26 @@ public class Player extends Actor {
         if ( input.keys[3] ) {
             if(!keyPressed) {
                 if ( gameMap.getMapKey(x + 1, y) != 2) {
-                    setNextPos(this.x, this.y, gameMap.getMapKey(x + 1, y));
-                    x += 1; // go right
+
+                    nextPos.setX(x);
+                    nextPos.setY(y);
+                    nextPos.setKey(gameMap.getMapKey(x + 1, y));
+
+                    x += 1; // Right
+
                 }
                 keyPressed = true;
             }
         } else if ( input.keys[1] ) {
             if(!keyPressed) {
                 if ( gameMap.getMapKey(x - 1, y) != 2) {
-                    setNextPos(this.x, this.y, gameMap.getMapKey(x - 1, y));
-                    x -= 1; // go left
+
+                    nextPos.setX(x);
+                    nextPos.setY(y);
+                    nextPos.setKey(gameMap.getMapKey(x - 1, y));
+
+                    x -= 1; // Left
+
                 }
                 keyPressed = true;
             }
@@ -66,8 +76,13 @@ public class Player extends Actor {
             if(!keyPressed) {
 
                 if ( gameMap.getMapKey(x, y + 1) != 2) {
-                    setNextPos(this.x, this.y, gameMap.getMapKey(x, y + 1));
+
+                    nextPos.setX(x);
+                    nextPos.setY(y);
+                    nextPos.setKey(gameMap.getMapKey(x, y + 1));
+
                     y += 1; // go up
+
                 }
 
                 keyPressed = true;
@@ -76,8 +91,13 @@ public class Player extends Actor {
             if(!keyPressed) {
 
                 if ( gameMap.getMapKey(x, y - 1) != 2) {
-                    setNextPos(this.x, this.y, gameMap.getMapKey(x, y - 1));
+
+                    nextPos.setX(x);
+                    nextPos.setY(y);
+                    nextPos.setKey(gameMap.getMapKey(x, y - 1));
+
                     y -= 1; // go down
+
                 }
 
                 keyPressed = true;
@@ -92,18 +112,15 @@ public class Player extends Actor {
 
     public void setNextPos(int x, int y, int key) {
         // Stops the player painting the map, leaving their colour in the previous square.
-        nextPos[0] = x;
-        nextPos[1] = y;
-        nextPos[2] = key;
-    }
-
-    public int[] getNextPos() {
-        return nextPos;
+        nextPos.setX(x);
+        nextPos.setX(y);
+        nextPos.setKey(key);
     }
 
     private void updateState() {
         gameMap.setMapPosition(this.x, this.y, this.key);
-        gameMap.setMapPosition(nextPos[0], nextPos[1], nextPos[2]);
+        System.out.println(nextPos.getX() + " " + nextPos.getY() + " " + nextPos.getKey());
+        gameMap.setMapPosition(nextPos.getX(), nextPos.getY(), nextPos.getKey());
     }
 
 
