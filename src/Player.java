@@ -46,6 +46,7 @@ public class Player extends Actor {
             3 = right
         */
 
+
         if ( input.keys[3] ) {
             if(!keyPressed) {
                 if ( gameMap.getMapKey(x + 1, y) != 2) {

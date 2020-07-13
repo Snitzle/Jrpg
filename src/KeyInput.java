@@ -13,18 +13,20 @@ public class KeyInput extends KeyAdapter {
 
         int key = e.getKeyCode();
 
-        /*
-            Legend
-            0 = up
-            1 = left
-            2 = down
-            3 = right
-        */
-
-        if ( key == KeyEvent.VK_W ) { keys[0] = true; }
-        if ( key == KeyEvent.VK_A ) { keys[1] = true; }
-        if ( key == KeyEvent.VK_S ) { keys[2] = true; }
-        if ( key == KeyEvent.VK_D ) { keys[3] = true; }
+        switch (key) {
+            case KeyEvent.VK_W: // Up
+                keys[0] = true;
+                break;
+            case KeyEvent.VK_A: // Left
+                keys[1] = true;
+                break;
+            case KeyEvent.VK_S: // Right
+                keys[2] = true;
+                break;
+            case KeyEvent.VK_D: // Down
+                keys[3] = true;
+                break;
+        }
 
     }
 
@@ -32,10 +34,20 @@ public class KeyInput extends KeyAdapter {
 
         int key = e.getKeyCode();
 
-        if ( key == KeyEvent.VK_W ) { keys[0] = false; }
-        if ( key == KeyEvent.VK_A ) { keys[1] = false; }
-        if ( key == KeyEvent.VK_S ) { keys[2] = false; }
-        if ( key == KeyEvent.VK_D ) { keys[3] = false; }
+        switch (key) {
+            case KeyEvent.VK_W: // Up
+                keys[0] = false;
+                break;
+            case KeyEvent.VK_A: // Left
+                keys[1] = false;
+                break;
+            case KeyEvent.VK_S: // Right
+                keys[2] = false;
+                break;
+            case KeyEvent.VK_D: // Down
+                keys[3] = false;
+                break;
+        }
 
     }
 
