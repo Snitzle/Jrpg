@@ -4,7 +4,7 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
     // 32px squares, 40 wide, 30 tall
     public static int WIDTH = 1280, HEIGHT = 960;
-    public static String title = "ZOMBIE GAME";
+    public static String title = "2D Game";
     public static int gridWidth = WIDTH / 32;
     public static int gridHeight = HEIGHT / 32;
 

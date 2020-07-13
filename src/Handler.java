@@ -12,7 +12,7 @@ public class Handler {
         return Instance;
     }
 
-    public ArrayList<Actor> object = new ArrayList<Actor>();
+    public ArrayList<Actor> object = new ArrayList<>();
 
     public void tick() {
         for ( Actor obj : object ) {
